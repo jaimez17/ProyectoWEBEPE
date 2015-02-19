@@ -4,7 +4,7 @@ class UsuariosController < ApplicationController
   def login 
     render layout: "login"
   end
-
+  
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -80,5 +80,11 @@ class UsuariosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
       params.require(:usuario).permit(:nombres, :apellidos, :codigo, :apellido_paterno, :apellido_materno, :primer_nombre, :segundo_nombre, :role_id)
+
     end
+    
+    def sign_up_params
+      params.require(:usuario).permit(:primer_nombre, :segundo_nombre, :apellido_materno, :apellido_paterno, :emai, :password, :password_confirmation, :apellido_materno)
+    end
+        
 end

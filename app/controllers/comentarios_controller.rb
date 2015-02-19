@@ -29,15 +29,19 @@ class ComentariosController < ApplicationController
   def create
     @comentario = Comentario.new(comentario_params)
 
-    respond_to do |format|
+    #respond_to do |format|
       if @comentario.save
-        format.html { redirect_to @comentario, notice: 'Comentario was successfully created.' }
-        format.json { render :show, status: :created, location: @comentario }
+          if (comentario_params.has_key?(:usuario_id))
+            redirect_to '/tickets/' + comentario_params[:ticket_id] , notice: 'Comentario was successfully created.' 
+          else
+            redirect_to '/tickets/ver/' + comentario_params[:ticket_id] , notice: 'Comentario was successfully created.' 
+          end
+        
       else
-        format.html { render :new }
-        format.json { render json: @comentario.errors, status: :unprocessable_entity }
+        #format.html { render :new }
+        #format.json { render json: @comentario.errors, status: :unprocessable_entity }
       end
-    end
+    #end
   end
 
   # PATCH/PUT /comentarios/1

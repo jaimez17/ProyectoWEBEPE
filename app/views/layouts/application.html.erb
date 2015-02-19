@@ -47,18 +47,24 @@
 </head>
 <body>
   <div id="wrapper">
-<div id="user_nav">
-  <% if current_user %>
-    Signed in as <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
-</div>
+  <div id="user_nav">
+    <% if current_user %>
+      Signed in as <strong><%= current_user.name %></strong>!
+      <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <% else %>
+      <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+    <% end %>
+  </div>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
       <%= render :partial => "/comunes/top" %>
-      <%= render :partial => "/comunes/" + @menu  %>
+      <%= 
+      if defined?(@menu)
+          render :partial => "/comunes/" + @menu
+      end
+      
+      
+      %>
     </nav>  
     <div id="page-wrapper">
       <div class="col-md-12">
