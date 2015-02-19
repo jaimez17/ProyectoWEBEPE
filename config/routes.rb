@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :usuarios
   resources :knows
 
   #mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -26,8 +25,6 @@ Rails.application.routes.draw do
 
   resources :categoria
 
-  resources :usuarios
-
   resources :empleados
 
   resources :areas
@@ -41,8 +38,17 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'usuarios#login'
-
+   #root 'usuarios#login'
+  devise_for :usuarios
+  devise_scope :usuario do
+    authenticated :usuario do
+      root :to => 'tickets#index', as: :authenticated_root
+    end
+    unauthenticated :usuario do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+   resources :usuarios    
   # Example of regular route:
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
