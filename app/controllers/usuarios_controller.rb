@@ -83,8 +83,8 @@ class UsuariosController < ApplicationController
 
     end
     
-    def sign_up_params
-      params.require(:usuario).permit(:primer_nombre, :segundo_nombre, :apellido_materno, :apellido_paterno, :emai, :password, :password_confirmation, :apellido_materno)
-    end
+    #def sign_up_params
+    #  params.require(:usuario).permit(:primer_nombre, :segundo_nombre, :apellido_materno, :apellido_paterno, :email, :password, :password_confirmation, :apellido_materno)
+    #end
         
 end

@@ -3,6 +3,8 @@
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
+  <% if devise_controller? && resource_name == :usuario %>
+
   <%= f.input :apellido_paterno, :label => "Apellido Paterno" %>
   <%= error_span(@usuario[:apellido_paterno]) %>
 
@@ -14,7 +16,30 @@
 
   <%= f.input :segundo_nombre, :label => "Segundo Nombre" %>
   <%= error_span(@usuario[:segundo_nombre]) %>
-
+  <% end %>
+  
+  <% if devise_controller? && resource_name == :empleado %>
+    <%= f.input :username, :label => "Usuario" %>
+    <%= error_span(@empleado[:username]) %>
+    <%= f.input :apellidos, :label => "Apellidos" %>
+    <%= error_span(@empleado[:apellidos]) %>
+    <%= f.input :nombres, :label => "Nombres" %>
+    <%= error_span(@empleado[:nombres]) %>
+    
+    <div class="form-group"> 
+    <%= f.label :area_id, "Und. Negocio" %>
+    <%= f.collection_select :area_id, Area.all, :id, :name , {prompt: "Seleccione Unidad de Negocio"}, {class: "form-control"} %>
+    <%= error_span(@empleado[:area_id]) %>
+  
+    </div>
+    
+    <div class="form-group"> 
+    <%= f.label :role_id, "Role" %>
+    <%= f.collection_select :role_id, Role.all, :id, :name , {prompt: "Seleccione Rol"}, {class: "form-control"} %>
+    <%= error_span(@empleado[:role_id]) %>
+    </div>
+    
+  <% end %>
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>

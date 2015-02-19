@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :usuarios
+  devise_for :empleados
   resources :knows
 
   #mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -25,11 +25,7 @@ Rails.application.routes.draw do
   resources :subcategoria
 
   resources :categoria
-
-  resources :usuarios
-
-  resources :empleados
-
+  
   resources :areas
 
   resources :empresas
@@ -41,7 +37,19 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'usuarios#login'
+   #root 'usuarios#login'
+  devise_for :usuarios
+  devise_scope :usuario do
+    authenticated :usuario do
+      root :to => 'tickets#index', as: :authenticated_root
+    end
+    unauthenticated :usuario do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+   resources :usuarios    
+   
+  resources :empleados
 
   # Example of regular route:
 

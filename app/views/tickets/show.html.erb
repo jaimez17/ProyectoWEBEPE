@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Regresar a Mis Incidencias', tickets_path %>
 <p>
   <strong>Número de código:</strong>
   <%= @ticket.codigo %>
@@ -17,12 +18,12 @@
 
 <p>
   <strong>Cliente:</strong>
-  <%= @ticket.usuario %>
+  <%= @ticket.usuario.apellido_paterno %>
 </p>
 
 <p>
   <strong>Empleado:</strong>
-  <%#= @ticket.empleado.nombres %> <%#= @ticket.empleado.apellidos %> 
+  <%= @ticket.empleado.nombres %> <%#= @ticket.empleado.apellidos %> 
 </p>
 
 <p>
@@ -39,21 +40,39 @@
   <strong>Area:</strong>
   <%= @ticket.area.name %>
 </p>
+
+<h3>Historial</h3>
+<div class="row">
     <% @comentarios.each do |comentario| %>
-      <%= comentario.comentario %> <br>
+      <%#= debug comentario %>
+      <% if comentario.empleado_id == 0 %>
+      <div class="text-left r_usuario">
+        <img src="/img/usuario_mujer.png" class="img-thumbnail">
+        <%= comentario.primer_nombre %> dijo el: <%= comentario.created_at.strftime('%d-%m-%Y') %> 
+      <% else %>
+      <div class="text-right r_empleado">
+        <img src="/img/empledo_hombre.png" class="img-thumbnail pull-right">
+        <%= comentario.apellidos %> dijo el: <%= comentario.created_at.strftime('%d-%m-%Y') %> 
+      <% end %>
+      <%= comentario.comentario %>
+      </div> 
     <% end %>
     
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Back', tickets_path %>
+</div>
 
 <h2>Responder</h2>
 <%= simple_form_for(@comentario) do |f| %>
   <%= f.error_notification %>
-  <%= f.input :ticket_id, :as => :hidden, :input_html => { :value => @ticket.id } %>
-  <%= f.input :usuario_id, :as => :hidden, :input_html => { :value => 1 } %>
-
-  <%= f.input :comentario %>
-  <div class="form-actions">
-    <%= f.button :submit %>
+  
+  <div class="input-group">
+    <%= f.text_field :comentario, :class => "form-control", :wrapper  => false %>
+    <span class="input-group-btn">
+      <%= f.submit 'Enviar', :class => 'btn btn-default' %>   
+    </span>
   </div>
+  <%= f.input :ticket_id, :as => :hidden, :input_html => { :value => @ticket.id } %>
+  <%= f.input :usuario_id, :as => :hidden, :input_html => { :value => current_usuario.id } %>
+  <%= f.input :empleado_id, :as => :hidden, :input_html => { :value => 0 } %>
+
+  
 <% end %>

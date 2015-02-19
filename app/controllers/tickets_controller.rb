@@ -4,12 +4,12 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.where(usuario_id: current_usuario.id)
     @menu = "menu1"
   end
 
   def abiertas 
-    @tickets = Ticket.all
+    @tickets = Ticket.where(estado: "1")
     @ticket = Ticket.new
     @menu = "menu2"
   end
@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
   def show
     @menu = "menu1"
     @ticket = Ticket.find(params[:id])
-    @comentarios = Comentario.where(ticket_id: @ticket.id).select('*').all.joins('LEFT JOIN "empleados" ON "empleados"."id" = "comentarios"."empleado_id" LEFT JOIN "usuarios" ON "usuarios"."id" = "comentarios"."usuario_id"')
+    @comentarios = Comentario.where(ticket_id: @ticket.id).select('comentarios.*, empleados.nombres, empleados.apellidos, usuarios.primer_nombre, usuarios.apellido_paterno').all.joins('LEFT JOIN "empleados" ON "empleados"."id" = "comentarios"."empleado_id" LEFT JOIN "usuarios" ON "usuarios"."id" = "comentarios"."usuario_id"')
     @comentario = Comentario.new
   end
 
@@ -63,7 +63,7 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    params[:ticket][:usuario_id] = 1 #MI USUARIO
+    params[:ticket][:usuario_id] = current_usuario.id #MI USUARIO
     params[:ticket][:empresa_id] = 1 #EMPRESA OXICODE
     params[:ticket][:prioridad] = 2
     params[:ticket][:estado] = 1
@@ -74,7 +74,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       
       if @ticket.save
-        Comentario.create(comentario: params[:ticket][:comentario], ticket_id: @ticket.id, empleado_id: params[:ticket][:empleado_id], usuario_id: false).save
+        Comentario.create(comentario: params[:ticket][:comentario], ticket_id: @ticket.id, empleado_id: 0, usuario_id: params[:ticket][:usuario_id]).save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
