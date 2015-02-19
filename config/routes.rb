@@ -12,6 +12,14 @@ Rails.application.routes.draw do
   
   get 'tickets/abiertas' => 'tickets#abiertas'
   post 'tickets/asignar' => 'tickets#asignar'
+  get 'tickets/atendidas' => 'tickets#atendidas'
+  post 'tickets/atendidas' => 'tickets#atendidas'
+  get 'tickets/asignadas' => 'tickets#asignadas'
+  post 'tickets/asignadas' => 'tickets#asignadas'
+  #get 'tickets/ver' => 'tickets#ver'
+  get 'tickets/ver/:id' => 'tickets#ver'
+  #post 'tickets/ver' => 'tickets#ver'
+  
   resources :tickets
 
   resources :subcategoria

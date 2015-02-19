@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<div id="menu"></div>
+
+<h1>Incidencias Atendidas</h1>
+
+<table class="table table-striped">  
+  <thead>
+    <tr>
+     <th>Ticket</th>
+      <th>Asunto</th>
+      <th>Fecha</th>
+      <th>Unid. Negocio</th>
+      <th>Categoría</th>
+      <th>Subcategoría</th>
+      <th>Tipo</th>
+      <th>Estado</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.codigo %></td>
+        <td><%= ticket.asunto %></td>
+        <td><%= ticket.created_at.strftime("%d-%m-%Y") %></td>
+        <td><%= ticket.area.name %></td>
+        <td><%= ticket.categoria.name %></td>
+        <td><%= ticket.subcategoria.name %></td>
+        <td><%= ticket.tipo %></td>
+        <td><%= estado(ticket.estado) %></td>
+        <td>
+          
+          <%= link_to "Ver", ticket_path(ticket.id), :class => 'btn btn-default btn-xs' %>
+          
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to "Nuevo Ticket",
+            new_ticket_path, 
+            :class => 'btn btn-primary' %>

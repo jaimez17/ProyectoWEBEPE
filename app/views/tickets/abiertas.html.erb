@@ -64,7 +64,7 @@
         <%= f.label :empleado_id, "Asignar a"  %>
         <%= f.collection_select :empleado_id, Empleado.all, :id, :apellidos, {prompt: "Seleccionar Usuario"}, {class: "form-control"} %>
         <%= error_span(@ticket[:empleado_id]) %>
-       
+
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Grabar</button>
