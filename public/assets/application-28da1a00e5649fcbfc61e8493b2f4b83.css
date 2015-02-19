@@ -1,3 +1,13 @@
+/* line 5, /home/ubuntu/workspace/app/assets/stylesheets/tickets.scss */
+.r_usuario {
+  background-color: #ddd;
+}
+
+/* line 8, /home/ubuntu/workspace/app/assets/stylesheets/tickets.scss */
+.r_empleado {
+  background-color: #ccc;
+  min-height: 74px;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,5 +20,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+
  */
+

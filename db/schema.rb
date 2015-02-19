@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219082028) do
+ActiveRecord::Schema.define(version: 20150219094823) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150219082028) do
     t.integer  "ticket_id"
     t.integer  "empleado_id"
     t.integer  "usuario_id"
-    t.datetime "created_at",  null: false
+    t.datetime "created_at"
     t.datetime "updated_at",  null: false
   end
 
