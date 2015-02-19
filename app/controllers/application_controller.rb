@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
  
   def layout_by_resource
-    if devise_controller? && resource_name == :usuario && action_name == "new"
+    if devise_controller? && action_name == "new"
       "login"
     else
       "application"
@@ -18,7 +18,19 @@ class ApplicationController < ActionController::Base
   before_filter :update_sanitized_params, if: :devise_controller?
   
   def update_sanitized_params
-    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:primer_nombre, :segundo_nombre, :apellido_materno, :apellido_paterno, :email, :password, :password_confirmation, :apellido_materno)}
+    if resource_name == :usuario
+      @menu = 'menu1'
+      devise_parameter_sanitizer.for(:sign_up) {
+        |u| u.permit(:primer_nombre, :segundo_nombre, :apellido_materno, :apellido_paterno, :email, :password, :password_confirmation, :apellido_materno)
+      }      
+    end
+    if resource_name == :empleado
+      @menu = 'menu2'
+      devise_parameter_sanitizer.for(:sign_up) {
+        |u| u.permit(:nombres, :apellidos, :username, :empresa_id, :area_id, :role_id, :email, :password, :password_confirmation, :apellido_materno)
+      }      
+    end    
+
   end
 
   private

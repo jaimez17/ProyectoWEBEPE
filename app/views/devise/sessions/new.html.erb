@@ -10,6 +10,7 @@
                 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {:role => "form"}) do |f| %>
                         <fieldset>
                             <div class="form-group">
+                                <% if devise_controller? && resource_name == :usuario %>
                                 <% if current_user %>
                                      Signed in as <strong><%= current_user.name %></strong>!
                                     <%= link_to "Sign out", signout_path, id: "sign_out" %>
@@ -18,6 +19,7 @@
                                   <i class="fa fa-facebook"></i>
                                   Sign in with Facebook
                                 </a>                                
+                                <% end %>
                                 <% end %>
                             </div>
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :empleados
   resources :knows
 
   #mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -24,9 +25,7 @@ Rails.application.routes.draw do
   resources :subcategoria
 
   resources :categoria
-
-  resources :empleados
-
+  
   resources :areas
 
   resources :empresas
@@ -49,6 +48,9 @@ Rails.application.routes.draw do
     end
   end
    resources :usuarios    
+   
+  resources :empleados
+
   # Example of regular route:
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

@@ -75,4 +75,9 @@ class EmpleadosController < ApplicationController
     def empleado_params
       params.require(:empleado).permit(:nombres, :apellidos, :username, :empresa_id, :area_id, :role_id, :email)
     end
+    
+    #def sign_up_params
+    #  params.require(:usuario).permit(:nombres, :apellidos, :username, :empresa_id, :area_id, :role_id, :email, :password, :password_confirmation, :apellido_materno)
+    #end
+            
 end
