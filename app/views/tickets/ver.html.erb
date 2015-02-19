@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<!-- COPIADO DEL SHOW DE TICKETS-->
+
 <p>
   <strong>Número de código:</strong>
   <%= @ticket.codigo %>
@@ -20,10 +22,11 @@
   <%= @ticket.usuario %>
 </p>
 
+<!--
 <p>
   <strong>Empleado:</strong>
   <%#= @ticket.empleado.nombres %> <%#= @ticket.empleado.apellidos %> 
-</p>
+</p>-->
 
 <p>
   <strong>Categoria:</strong>
@@ -39,7 +42,6 @@
   <strong>Area:</strong>
   <%= @ticket.area.name %>
 </p>
-<%= debug(@comentarios) %>
 
     <% @comentarios.each do |comentario| %>
     <%= debug(comentario) %>
@@ -50,6 +52,21 @@
         
       </tr>
     <% end %>
+
+<%= simple_form_for(@comentario) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :comentario %>
+    <%= f.input :ticket_id, :as => :hidden, :input_html => { :value => @ticket.id } %>
+    <%= f.input :empleado_id, :as => :hidden, :input_html => { :value => 1 } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
     
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>

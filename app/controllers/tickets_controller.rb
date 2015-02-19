@@ -14,9 +14,14 @@ class TicketsController < ApplicationController
     @menu = "menu2"
   end
 
-  def atendidas
+  def asignadas
+    #@tickets = Ticket.where(estado: "2")
     @tickets = Ticket.all
-    @ticket = Ticket.new
+    @menu = "menu2"
+  end
+
+  def atendidas
+    @tickets = Ticket.where(estado: "3")
     @menu = "menu2"
   end
 
@@ -27,6 +32,15 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @comentarios = Comentario.where(ticket_id: @ticket.id).select('*').all.joins('LEFT JOIN "empleados" ON "empleados"."id" = "comentarios"."empleado_id" LEFT JOIN "usuarios" ON "usuarios"."id" = "comentarios"."usuario_id"')
     #@comentarios = Comentario.where(ticket_id: @ticket.id).all.joins(:empleado, :usuario)
+  end
+
+  def ver
+    @menu = "menu2"
+    @ticket = Ticket.find(params[:id])
+    @comentarios = Comentario.where(ticket_id: @ticket.id).select('*').all.joins('LEFT JOIN "empleados" ON "empleados"."id" = "comentarios"."empleado_id" LEFT JOIN "usuarios" ON "usuarios"."id" = "comentarios"."usuario_id"')
+    #@comentarios = Comentario.where(ticket_id: @ticket.id).all.joins(:empleado, :usuario)
+    @comentario = Comentario.new
+    
   end
 
   # GET /tickets/new

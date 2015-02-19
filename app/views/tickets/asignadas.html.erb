@@ -2,7 +2,7 @@
 
 <div id="menu"></div>
 
-<h1>Incidencias Atendidas</h1>
+<h1>Mis Incidencias Asignadas</h1>
 
 <table class="table table-striped">  
   <thead>
@@ -31,7 +31,7 @@
         <td><%= estado(ticket.estado) %></td>
         <td>
           
-          <%= link_to "Ver", ticket_path(ticket.id), :class => 'btn btn-default btn-xs' %>
+          <%= link_to "Ver", "/tickets/ver/" + ticket.id.to_s, :class => 'btn btn-default btn-xs' %>
           
         </td>
       </tr>
