@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   get 'tickets/abiertas' => 'tickets#abiertas'
   post 'tickets/asignar' => 'tickets#asignar'
+  get 'tickets/atendidas' => 'tickets#atendidas'
+  post 'tickets/atendidas' => 'tickets#atendidas'
   resources :tickets
 
   resources :subcategoria

@@ -14,6 +14,12 @@ class TicketsController < ApplicationController
     @menu = "menu2"
   end
 
+  def atendidas
+    @tickets = Ticket.all
+    @ticket = Ticket.new
+    @menu = "menu2"
+  end
+
     # GET /tickets/1
   # GET /tickets/1.json
   def show
@@ -34,7 +40,7 @@ class TicketsController < ApplicationController
   def asignar
     #params[:ticket][:estado] = 2
     #debugger params
-    #render nothing: true
+    render nothing: false
   end
     
   # POST /tickets
