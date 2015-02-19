@@ -25,13 +25,13 @@ class TicketsController < ApplicationController
     @menu = "menu2"
   end
 
-    # GET /tickets/1
+  # GET /tickets/1
   # GET /tickets/1.json
   def show
     @menu = "menu1"
     @ticket = Ticket.find(params[:id])
     @comentarios = Comentario.where(ticket_id: @ticket.id).select('*').all.joins('LEFT JOIN "empleados" ON "empleados"."id" = "comentarios"."empleado_id" LEFT JOIN "usuarios" ON "usuarios"."id" = "comentarios"."usuario_id"')
-    #@comentarios = Comentario.where(ticket_id: @ticket.id).all.joins(:empleado, :usuario)
+    @comentario = Comentario.new
   end
 
   def ver
@@ -70,7 +70,7 @@ class TicketsController < ApplicationController
     params[:ticket][:empleado_id] = Empleado.find_by(role_id: "2", area_id: params[:ticket][:area_id]).id
     params[:ticket][:codigo] = Ticket.where(empresa_id: 1).count + 1
     @ticket = Ticket.new(ticket_params)
-    Rails.logger.debug params
+    
     respond_to do |format|
       
       if @ticket.save

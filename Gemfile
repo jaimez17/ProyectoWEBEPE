@@ -53,3 +53,4 @@ gem "twitter-bootstrap-rails"
 gem 'omniauth-facebook'
 #gem 'rails_admin'
 #gem 'activeadmin'
+gem 'devise'  

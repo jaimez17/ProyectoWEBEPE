@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :usuarios
+  resources :knows
+
   #mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :comentarios
 
