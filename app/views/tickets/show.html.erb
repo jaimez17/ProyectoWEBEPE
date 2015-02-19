@@ -39,18 +39,21 @@
   <strong>Area:</strong>
   <%= @ticket.area.name %>
 </p>
-<%= debug(@comentarios) %>
-
     <% @comentarios.each do |comentario| %>
-    <%= debug(comentario) %>
-      <tr>
-        <td><%= comentario.comentario %></td>
-        <td></td>
-        <td></td>
-        
-      </tr>
+      <%= comentario.comentario %> <br>
     <% end %>
     
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>
 
+<h2>Responder</h2>
+<%= simple_form_for(@comentario) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :ticket_id, :as => :hidden, :input_html => { :value => @ticket.id } %>
+  <%= f.input :usuario_id, :as => :hidden, :input_html => { :value => 1 } %>
+
+  <%= f.input :comentario %>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
