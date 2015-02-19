@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(version: 20150219055501) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "knows", force: :cascade do |t|
+    t.string   "name"
+    t.string   "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false

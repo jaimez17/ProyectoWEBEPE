@@ -1,0 +1,11 @@
+<%= simple_form_for @know, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name, :label => "Titulo" %>
+  <%= error_span(@know[:name]) %>
+  <%= f.input :descripcion, :label => "Detalle" %>
+  <%= error_span(@know[:descripcion]) %>
+
+
+  <%= f.submit 'Grabar', :class => 'btn btn-sm btn-primary' %>
+  <%= link_to t('.cancel', :default => "Cancelar"),
+                knows_path, :class => 'btn btn-default' %>
+<% end %>
