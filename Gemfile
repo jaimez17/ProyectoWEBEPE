@@ -50,3 +50,6 @@ gem 'simple_form'
 gem "therubyracer"
 #gem "less-rails"
 gem "twitter-bootstrap-rails"
+gem 'omniauth-facebook'
+#gem 'rails_admin'
+#gem 'activeadmin'

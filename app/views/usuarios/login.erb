@@ -9,11 +9,18 @@
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <a class="btn btn-block btn-social btn-twitter">
+                                
+                                <% if current_user %>
+                                     Signed in as <strong><%= current_user.name %></strong>!
+                                    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+                                  <% else %>
+                                <a class="btn btn-block btn-social btn-twitter" id="sign_in" >
                                   <i class="fa fa-facebook"></i>
                                   Sign in with Facebook
                                 </a>                                
+                                <% end %>
                             </div>
+
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                             </div>

@@ -45,10 +45,8 @@
   
   <div class="form-group"> 
   <%= 
-    f.simple_fields_for :comentarios do |com|
-      com.label :comentario
-      com.text_area :comentario, :class => 'form-control'
-    end
+      f.label :comentario, "Consulta"
+      f.text_area :comentario, :class => 'form-control', :default => ''
   %>
   </div>  
 

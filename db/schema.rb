@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219010805) do
+ActiveRecord::Schema.define(version: 20150219013948) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -113,9 +113,9 @@ ActiveRecord::Schema.define(version: 20150219010805) do
     t.integer  "area_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "tipo"
+    t.decimal  "tipo"
     t.string   "codigo"
-    t.integer  "estado"
+    t.decimal  "estado"
   end
 
   add_index "tickets", ["area_id"], name: "index_tickets_on_area_id"
@@ -124,6 +124,16 @@ ActiveRecord::Schema.define(version: 20150219010805) do
   add_index "tickets", ["empresa_id"], name: "index_tickets_on_empresa_id"
   add_index "tickets", ["subcategoria_id"], name: "index_tickets_on_subcategoria_id"
   add_index "tickets", ["usuario_id"], name: "index_tickets_on_usuario_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "nombres"
@@ -138,6 +148,11 @@ ActiveRecord::Schema.define(version: 20150219010805) do
     t.string   "primer_nombre"
     t.string   "segundo_nombre"
     t.string   "role_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
   add_index "usuarios", ["empresa_id"], name: "index_usuarios_on_empresa_id"

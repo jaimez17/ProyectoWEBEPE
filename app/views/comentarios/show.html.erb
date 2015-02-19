@@ -7,17 +7,17 @@
 
 <p>
   <strong>Ticket:</strong>
-  <%= @comentario.ticket %>
+  <%= debug(@comentario.ticket) %>
 </p>
 
 <p>
   <strong>Empleado:</strong>
-  <%= @comentario.empleado %>
+  <%= debug(@comentario.empleado) %>
 </p>
 
 <p>
   <strong>Usuario:</strong>
-  <%= @comentario.usuario %>
+  <%= debug(@comentario.usuario) %>
 </p>
 
 <%= link_to 'Edit', edit_comentario_path(@comentario) %> |

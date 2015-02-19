@@ -6,12 +6,20 @@
   <%= error_span(@empleado[:apellidos]) %>
   <%= f.input :nombres, :label => "Nombres" %>
   <%= error_span(@empleado[:nombres]) %>
-  <%= f.label :area_id, "Und.Negocio" %>
+  
+  <div class="form-group"> 
+  <%= f.label :area_id, "Und. Negocio" %>
   <%= f.collection_select :area_id, Area.all, :id, :name , {prompt: "Seleccione Unidad de Negocio"}, {class: "form-control"} %>
   <%= error_span(@empleado[:area_id]) %>
-  <%= f.label :role_id, "Rol" %>
+
+  </div>
+  
+  <div class="form-group"> 
+  <%= f.label :role_id, "Role" %>
   <%= f.collection_select :role_id, Role.all, :id, :name , {prompt: "Seleccione Rol"}, {class: "form-control"} %>
   <%= error_span(@empleado[:role_id]) %>
+  </div>
+  
   <%= f.input :email, :label => "E-mail" %>
   <%= error_span(@empleado[:email]) %>
 

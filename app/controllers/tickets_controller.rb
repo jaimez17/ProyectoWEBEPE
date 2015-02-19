@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:edit, :update, :destroy]
 
   # GET /tickets
   # GET /tickets.json
@@ -24,6 +24,9 @@ class TicketsController < ApplicationController
   # GET /tickets/1.json
   def show
     @menu = "menu1"
+    @ticket = Ticket.find(params[:id])
+    @comentarios = Comentario.where(ticket_id: @ticket.id).select('*').all.joins('LEFT JOIN "empleados" ON "empleados"."id" = "comentarios"."empleado_id" LEFT JOIN "usuarios" ON "usuarios"."id" = "comentarios"."usuario_id"')
+    #@comentarios = Comentario.where(ticket_id: @ticket.id).all.joins(:empleado, :usuario)
   end
 
   # GET /tickets/new
@@ -46,17 +49,18 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    
     params[:ticket][:usuario_id] = 1 #MI USUARIO
     params[:ticket][:empresa_id] = 1 #EMPRESA OXICODE
     params[:ticket][:prioridad] = 2
     params[:ticket][:estado] = 1
-    #params[:ticket][:empleado_id] = 
+    params[:ticket][:empleado_id] = Empleado.find_by(role_id: "2", area_id: params[:ticket][:area_id]).id
     params[:ticket][:codigo] = Ticket.where(empresa_id: 1).count + 1
     @ticket = Ticket.new(ticket_params)
-    
+    Rails.logger.debug params
     respond_to do |format|
+      
       if @ticket.save
+        Comentario.create(comentario: params[:ticket][:comentario], ticket_id: @ticket.id, empleado_id: params[:ticket][:empleado_id], usuario_id: false).save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
@@ -94,6 +98,7 @@ class TicketsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
       @ticket = Ticket.find(params[:id])
+      @comentarios = Comentario.find_by(ticket_id: @ticket.codigo)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

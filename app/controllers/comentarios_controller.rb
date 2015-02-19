@@ -5,11 +5,13 @@ class ComentariosController < ApplicationController
   # GET /comentarios.json
   def index
     @comentarios = Comentario.all
+    @menu = "menu1"
   end
 
   # GET /comentarios/1
   # GET /comentarios/1.json
   def show
+    @menu = "menu1"
   end
 
   # GET /comentarios/new
@@ -19,6 +21,7 @@ class ComentariosController < ApplicationController
 
   # GET /comentarios/1/edit
   def edit
+    @menu = "menu1"
   end
 
   # POST /comentarios
