@@ -73,6 +73,7 @@
   <%= f.input :ticket_id, :as => :hidden, :input_html => { :value => @ticket.id } %>
   <%= f.input :usuario_id, :as => :hidden, :input_html => { :value => current_usuario.id } %>
   <%= f.input :empleado_id, :as => :hidden, :input_html => { :value => 0 } %>
+  <%= f.input :ruta, :as => :hidden, :input_html => { :value => "show" } %>
 
   
 <% end %>

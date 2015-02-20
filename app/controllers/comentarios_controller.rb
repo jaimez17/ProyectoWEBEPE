@@ -31,7 +31,7 @@ class ComentariosController < ApplicationController
 
     #respond_to do |format|
       if @comentario.save
-          if (comentario_params.has_key?(:usuario_id))
+          if (comentario_params[:ruta] == "show" ) 
             redirect_to '/tickets/' + comentario_params[:ticket_id] , notice: 'Comentario was successfully created.' 
           else
             redirect_to '/tickets/ver/' + comentario_params[:ticket_id] , notice: 'Comentario was successfully created.' 
